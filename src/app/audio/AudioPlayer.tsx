@@ -52,10 +52,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
     console.log("Next button clicked");
   };
 
-  //   const handlePrevious = () => {
-  //     // Logic for previous track (can be extended to handle multiple tracks)
-  //     console.log("Previous button clicked");
-  //   };
+  const handlePrevious = () => {
+    // Logic for previous track (can be extended to handle multiple tracks)
+    console.log("Previous button clicked");
+  };
 
   const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
