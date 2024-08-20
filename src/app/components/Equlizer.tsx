@@ -1,12 +1,15 @@
 "use client";
-import React, { useRef } from 'react';
+import React, { useRef } from "react";
 
 interface EqualizerProps {
   audioContext: AudioContext | null;
   audioElement: HTMLAudioElement | null;
 }
 
-const Equalizer: React.FC<EqualizerProps> = ({ audioContext, audioElement }) => {
+const Equalizer: React.FC<EqualizerProps> = ({
+  audioContext,
+  audioElement,
+}) => {
   const gainNodesRef = useRef<GainNode[]>([]);
 
   React.useEffect(() => {
@@ -17,7 +20,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ audioContext, audioElement }) => 
 
       const filters = frequencies.map((frequency) => {
         const filter = audioContext.createBiquadFilter();
-        filter.type = 'peaking';
+        filter.type = "peaking";
         filter.frequency.value = frequency;
         filter.Q.value = 1;
         filter.gain.value = 0;
@@ -45,7 +48,7 @@ const Equalizer: React.FC<EqualizerProps> = ({ audioContext, audioElement }) => 
   return (
     <div>
       <div>
-        <label>16Hz: </label>
+        {/* <label>16Hz: </label> */}
         <input
           type="range"
           min="-40"
