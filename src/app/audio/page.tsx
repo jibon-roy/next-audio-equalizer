@@ -19,7 +19,7 @@ const AudioEqualizer: React.FC = () => {
 
   return (
     <div>
-      {/* <AudioPlayer onAudioContextReady={handleAudioContextReady} /> */}
+      <AudioPlayer onAudioContextReady={handleAudioContextReady} />
       <Equalizer audioContext={audioContext} audioElement={audioElement} />
     </div>
   );
