@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface AudioPlayerProps {
   onAudioContextReady: (audioContext: AudioContext, audioElement: HTMLAudioElement) => void;
@@ -28,11 +28,65 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
       document.removeEventListener('click', handleInteraction);
     };
   }, [onAudioContextReady]);
+    
+      const [currentTime, setCurrentTime] = useState(0);
+
+  const handlePause = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
+  const handlePlay = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+    };
+    
+      const handleNext = () => {
+    // Logic for next track (can be extended to handle multiple tracks)
+    console.log('Next button clicked');
+  };
+
+  const handlePrevious = () => {
+    // Logic for previous track (can be extended to handle multiple tracks)
+    console.log('Previous button clicked');
+  };
+
+
+  const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (audioRef.current) {
+      const seekTime = parseFloat(event.target.value);
+      audioRef.current.currentTime = seekTime;
+      setCurrentTime(seekTime);
+    }
+  };
+
 
   return (
-    <audio ref={audioRef} controls>
-      <source src="/aud.mp3" type="audio/mpeg" />
-    </audio>
+     <div className="audio-controls">
+      <audio ref={audioRef} onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}>
+        <source src="/aud.mp3" type="audio/mpeg" />
+      </audio>
+
+      {/* Custom controls */}
+      <div className="controls">
+        <button onClick={handlePrevious}>Previous</button>
+        <button onClick={handlePlay}>Play</button>
+        <button onClick={handlePause}>Pause</button>
+        <button onClick={handleNext}>Next</button>
+      </div>
+
+      {/* Seek bar */}
+      <input
+        type="range"
+        min="0"
+        max={audioRef.current?.duration || 0}
+        value={currentTime}
+        onChange={handleSeek}
+        className="seek-bar"
+      />
+    </div>
   );
 };
 
