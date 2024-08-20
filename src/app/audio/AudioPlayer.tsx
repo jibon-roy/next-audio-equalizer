@@ -1,8 +1,11 @@
 "use client";
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
 interface AudioPlayerProps {
-  onAudioContextReady: (audioContext: AudioContext, audioElement: HTMLAudioElement) => void;
+  onAudioContextReady: (
+    audioContext: AudioContext,
+    audioElement: HTMLAudioElement
+  ) => void;
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
@@ -12,24 +15,25 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
   useEffect(() => {
     const handleInteraction = () => {
       if (!audioContextRef.current) {
-        const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+        const audioContext = new (window.AudioContext ||
+          (window as any).webkitAudioContext)();
         audioContextRef.current = audioContext;
         onAudioContextReady(audioContext, audioRef.current as HTMLAudioElement);
-      } else if (audioContextRef.current.state === 'suspended') {
+      } else if (audioContextRef.current.state === "suspended") {
         audioContextRef.current.resume();
       }
     };
 
     // Listen for a user interaction
-    document.addEventListener('click', handleInteraction);
+    document.addEventListener("click", handleInteraction);
 
     // Cleanup event listener
     return () => {
-      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener("click", handleInteraction);
     };
   }, [onAudioContextReady]);
-    
-      const [currentTime, setCurrentTime] = useState(0);
+
+  const [currentTime, setCurrentTime] = useState(0);
 
   const handlePause = () => {
     if (audioRef.current) {
@@ -41,18 +45,17 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
     if (audioRef.current) {
       audioRef.current.play();
     }
-    };
-    
-      const handleNext = () => {
+  };
+
+  const handleNext = () => {
     // Logic for next track (can be extended to handle multiple tracks)
-    console.log('Next button clicked');
+    console.log("Next button clicked");
   };
 
   const handlePrevious = () => {
     // Logic for previous track (can be extended to handle multiple tracks)
-    console.log('Previous button clicked');
+    console.log("Previous button clicked");
   };
-
 
   const handleSeek = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (audioRef.current) {
@@ -62,10 +65,12 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
     }
   };
 
-
   return (
-     <div className="audio-controls">
-      <audio ref={audioRef} onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}>
+    <div className="audio-controls">
+      <audio
+        ref={audioRef}
+        onTimeUpdate={() => setCurrentTime(audioRef.current?.currentTime || 0)}
+      >
         <source src="/aud.mp3" type="audio/mpeg" />
       </audio>
 
