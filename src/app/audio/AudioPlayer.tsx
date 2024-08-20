@@ -41,11 +41,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
     }
   };
 
-  const handlePlay = () => {
-    if (audioRef.current) {
-      audioRef.current.play();
-    }
-  };
+  //   const handlePlay = () => {
+  //     if (audioRef.current) {
+  //       audioRef.current.play();
+  //     }
+  //   };
 
   const handleNext = () => {
     // Logic for next track (can be extended to handle multiple tracks)
