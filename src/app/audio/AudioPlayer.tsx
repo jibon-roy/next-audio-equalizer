@@ -35,11 +35,11 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
 
   const [currentTime, setCurrentTime] = useState(0);
 
-  //   const handlePause = () => {
-  //     if (audioRef.current) {
-  //       audioRef.current.pause();
-  //     }
-  //   };
+  const handlePause = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
 
   const handlePlay = () => {
     if (audioRef.current) {
