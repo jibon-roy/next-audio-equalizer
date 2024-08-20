@@ -58,7 +58,7 @@ const Equalizer: React.FC<EqualizerProps> = ({
         />
       </div>
       <div>
-        <label>160Hz: </label>
+        {/* <label>160Hz: </label>
         <input
           type="range"
           min="-40"
@@ -66,7 +66,7 @@ const Equalizer: React.FC<EqualizerProps> = ({
           defaultValue="0"
           onChange={(e) => adjustGain(1, parseFloat(e.target.value))}
         />
-      </div>
+      </div> */}
       <div>
         <label>400Hz: </label>
         <input
