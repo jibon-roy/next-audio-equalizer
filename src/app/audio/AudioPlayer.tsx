@@ -47,10 +47,10 @@ const AudioPlayer: React.FC<AudioPlayerProps> = ({ onAudioContextReady }) => {
     }
   };
 
-  const handleNext = () => {
-    // Logic for next track (can be extended to handle multiple tracks)
-    console.log("Next button clicked");
-  };
+  //   const handleNext = () => {
+  //     // Logic for next track (can be extended to handle multiple tracks)
+  //     console.log("Next button clicked");
+  //   };
 
   const handlePrevious = () => {
     // Logic for previous track (can be extended to handle multiple tracks)
