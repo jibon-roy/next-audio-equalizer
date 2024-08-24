@@ -1,5 +1,5 @@
-"use client"
-import React, { useEffect, useRef } from 'react';
+"use client";
+import React, { useEffect, useRef } from "react";
 
 const Equalizer: React.FC = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -8,18 +8,21 @@ const Equalizer: React.FC = () => {
 
   useEffect(() => {
     const handleInteraction = () => {
-      if (audioContextRef.current?.state === 'suspended') {
+      if (audioContextRef.current?.state === "suspended") {
         audioContextRef.current.resume();
       }
     };
 
-    document.addEventListener('click', handleInteraction);
+    document.addEventListener("click", handleInteraction);
 
     if (audioRef.current && !audioContextRef.current) {
-      const audioContext = new (window.AudioContext || (window as any).webkitAudioContext)();
+      const audioContext = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
       audioContextRef.current = audioContext;
 
-      const audioSource = audioContext.createMediaElementSource(audioRef.current);
+      const audioSource = audioContext.createMediaElementSource(
+        audioRef.current
+      );
 
       // Frequencies for the equalizer
       const frequencies = [16, 160, 400, 1000, 2400, 15000];
@@ -27,10 +30,10 @@ const Equalizer: React.FC = () => {
       // Create filters for each frequency
       const filters = frequencies.map((frequency) => {
         const filter = audioContext.createBiquadFilter();
-        filter.type = 'peaking';
+        filter.type = "peaking";
         filter.frequency.value = frequency;
-        filter.Q.value = 1; // Adjust as needed for the width of the frequency band
-        filter.gain.value = 0; // Set initial gain
+        filter.Q.value = 1;
+        filter.gain.value = 0;
         return filter;
       });
 
@@ -51,7 +54,7 @@ const Equalizer: React.FC = () => {
     }
 
     return () => {
-      document.removeEventListener('click', handleInteraction);
+      document.removeEventListener("click", handleInteraction);
     };
   }, []);
 
